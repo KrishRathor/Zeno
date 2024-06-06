@@ -25,3 +25,15 @@ This project aims to automate the setup and management of notification infrastru
    ```bash
    git clone git@github.com:KrishRathor/Zeno.git
 
+2. Install dependencies:
+
+   ```bash
+   bun install
+
+3. Run the project:
+
+   ```bash
+    bun run dev
+
+
+   
