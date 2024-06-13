@@ -35,8 +35,7 @@ export class SocketService {
 
       socket.on(EVENTS.ON_TRIGGER_INAPP, (props: IOnTriggerInAppProps) => {
         const { appID, subscriberId } = props;
-        const socketId = subscribersToSocketId[`${subscriberId}-${appID}`];
-        
+        const socketId = subscribersToSocketId[`${subscriberId}-${appID}`];        
         console.log(socketId);
 
         if (!socketId) {

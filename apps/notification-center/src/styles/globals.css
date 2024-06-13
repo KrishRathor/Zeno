@@ -31,3 +31,9 @@ body {
     text-wrap: balance;
   }
 }
+
+/* Custom scroll bar styles */
+::-webkit-scrollbar {
+  width: 0; /* Width of the entire scrollbar */
+}
+
