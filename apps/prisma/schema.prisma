@@ -1,0 +1,87 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Developer {
+  id          Int          @id @default(autoincrement())
+  createdAt   DateTime     @default(now())
+  username    String       @unique
+  email       String       @unique
+  password    String
+  appId       String       @unique
+  subscribers Subscriber[]
+  topics      Topic[]
+  workflow    Workflow[]
+}
+
+model Subscriber {
+  id           Int               @id @default(autoincrement())
+  subscriberId String
+  name         String?
+  email        String?
+  country      String?
+  developerId  Int
+  developer    Developer         @relation(fields: [developerId], references: [id])
+  topics       TopicSubscriber[]
+  workflow     Workflow[]
+  notification Notification[]
+
+  @@unique([developerId, subscriberId])
+}
+
+model Topic {
+  id           Int               @id @default(autoincrement())
+  createdAt    DateTime          @default(now())
+  title        String            @unique
+  developerId  Int
+  developer    Developer         @relation(fields: [developerId], references: [id])
+  subscribers  TopicSubscriber[]
+  workflow     Workflow[]
+  notification Notification[]
+}
+
+model TopicSubscriber {
+  id           Int        @id @default(autoincrement())
+  topicId      Int
+  subscriberId Int
+  topic        Topic      @relation(fields: [topicId], references: [id])
+  subscriber   Subscriber @relation(fields: [subscriberId], references: [id])
+  createdAt    DateTime   @default(now())
+
+  @@unique([topicId, subscriberId])
+}
+
+model Workflow {
+  id           Int         @id @default(autoincrement())
+  createdAt    DateTime    @default(now())
+  name         String
+  topicId      Int?
+  topic        Topic?      @relation(fields: [topicId], references: [id])
+  subscriberId Int?
+  subsriber    Subscriber? @relation(fields: [subscriberId], references: [id])
+  developerId  Int
+  developer    Developer   @relation(fields: [developerId], references: [id])
+
+  @@unique([developerId, name])
+}
+
+model Notification {
+  id           Int         @id @default(autoincrement())
+  createdAt    DateTime    @default(now())
+  content      String
+  topicId      Int?
+  topic        Topic?      @relation(fields: [topicId], references: [id])
+  subscriberId Int?
+  subsriber    Subscriber? @relation(fields: [subscriberId], references: [id])
+}
