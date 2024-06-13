@@ -3,7 +3,7 @@ export interface SocketProviderProps {
 }
 
 export interface ISocketContext {
-  notifications: string[]
+  notifications: ISingleNotificationProps[]
 }
 
 export enum EVENTS {
@@ -11,6 +11,11 @@ export enum EVENTS {
   SEND_NOTIFICATION_INAPP = 'SEND_NOTIFICATION_INAPP'
 }
 
+export interface ISingleNotificationProps {
+  message: string,
+  read: boolean
+}
+
 export interface IIncomingNotificationProps {
-  notification: string
+  notification: ISingleNotificationProps
 }

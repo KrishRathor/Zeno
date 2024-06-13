@@ -34,8 +34,9 @@ export class SocketService {
       }
 
       socket.on(EVENTS.ON_TRIGGER_INAPP, (props: IOnTriggerInAppProps) => {
-        const { appID, subscriberId } = props;
-        const socketId = subscribersToSocketId[`${subscriberId}-${appID}`];        
+        console.log('came here atleas');
+        const { appID, subscriberId, message, read } = props;
+        const socketId = subscribersToSocketId[`${subscriberId}-${appID}`];
         console.log(socketId);
 
         if (!socketId) {
@@ -43,7 +44,10 @@ export class SocketService {
         }
 
         io.to(socketId).emit(EVENTS.SEND_NOTIFICATION_INAPP, {
-          notification: 'Krish has uploaded a new post'
+          notification: {
+            message: message,
+            read: read 
+          }
         })
 
       })

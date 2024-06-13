@@ -11,15 +11,27 @@ async function main() {
   console.log('came here');
 
   const trigger = node.InApp.trigger({
-    subscriberId: 'user1'
+    subscriberId: 'user1',
+    message: 'Fully featured notification center in minutes',
+    read: false
   })
 
   const trigger3 = node.InApp.trigger({
-    subscriberId: 'user1'
+    subscriberId: 'user1',
+    message: 'Fully featured notification center in minutes',
+    read: false
   })
 
   const trigger2 = node.InApp.trigger({
-    subscriberId: 'user1'
+    subscriberId: 'user1',
+    message: 'Fully featured notification center in minutes',
+    read: true
+  })
+
+  const trigger4 = node.InApp.trigger({
+    subscriberId: 'user1',
+    message: 'Fully featured notification center in minutes',
+    read: true
   })
 
 }

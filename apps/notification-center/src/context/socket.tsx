@@ -1,6 +1,7 @@
 import React, { useCallback, useContext, useEffect, useState } from "react";
-import { EVENTS, IIncomingNotificationProps, ISocketContext, SocketProviderProps } from "./socket.types";
+import { EVENTS, IIncomingNotificationProps, ISingleNotificationProps, ISocketContext, SocketProviderProps } from "./socket.types";
 import { Socket, io } from "socket.io-client";
+import { nextTick } from "process";
 
 const SocketContext = React.createContext<ISocketContext | null>(null);
 
@@ -12,10 +13,10 @@ export const useSocket = () => {
 
 export const SocketProvider: React.FC<SocketProviderProps> = ({ children }) => {
   const [socket, setSocket] = useState<Socket>();
-  const [notifications, setNotifications] = useState<string[]>([]);
+  const [notifications, setNotifications] = useState<ISingleNotificationProps[]>([]);
 
   const handleIncomingNotifications = useCallback((data: IIncomingNotificationProps) => {
-    console.log(data);
+    console.log('data', data);
     setNotifications(prev => [...prev, data.notification]);
   }, []);
 

@@ -5,5 +5,7 @@ export enum EVENTS {
 
 export interface IOnTriggerInAppProps {
   appID: string,
-  subscriberId: string
+  subscriberId: string,
+  message: string,
+  read: boolean
 }

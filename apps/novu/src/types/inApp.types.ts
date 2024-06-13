@@ -1,5 +1,7 @@
 export interface IInAppTrigger {
-  subscriberId: string
+  subscriberId: string,
+  read: boolean,
+  message: string
 }
 
 export interface IInAppTriggerResponse {

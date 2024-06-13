@@ -4,11 +4,11 @@ import { useSocket } from "@/context/socket";
 export default function Home() {
 
   const { notifications } = useSocket();
-  console.log(notifications); 
+  console.log(notifications);
 
   return (
    <div>
-      <NotificationComponent />
+      <NotificationComponent notifications={notifications} />      
     </div>
  );
 }
